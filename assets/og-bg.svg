@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="wash1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.10"/>
+      <stop offset="45%" stop-color="#c9a84c" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="wash2" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8a6e2f" stop-opacity="0.14"/>
+      <stop offset="35%" stop-color="#8a6e2f" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#080808"/>
+  <rect width="1200" height="630" fill="url(#wash1)"/>
+  <rect width="1200" height="630" fill="url(#wash2)"/>
+
+  <rect x="64" y="139" width="34" height="3" fill="#c9a84c"/>
+  <text x="108" y="147" font-family="DM Sans, Arial, sans-serif" font-size="16" font-weight="600" letter-spacing="4" fill="#c9a84c">DIGITAL PERFORMANCE SPECIALIST</text>
+
+  <text x="62" y="248" font-family="Georgia, 'Times New Roman', serif" font-size="52" font-weight="400" fill="#f5f2ed">Leads that close.</text>
+  <text x="62" y="316" font-family="Georgia, 'Times New Roman', serif" font-size="52" font-weight="400" fill="#f5f2ed">Campaigns that perform.</text>
+
+  <text x="64" y="382" font-family="DM Sans, Arial, sans-serif" font-size="19" fill="#a09a90">Google Ads &#183; SEO &#183; Landing Pages &#183; Shopify</text>
+
+  <rect x="64" y="540" width="600" height="1" fill="#3a3632"/>
+  <text x="64" y="576" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="22" fill="#8a6e2f">mohabdo.com</text>
+</svg>

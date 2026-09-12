@@ -1,0 +1,11 @@
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Local tooling (not part of this static site, kept as a safety net)
+node_modules/
+
+# Working scratch from extracting the brand identity doc — the source
+# .docx and its plain-text extract are already tracked; this is just the
+# unzipped internal XML debris from that one-time extraction.
+assets/_brand_extract/
