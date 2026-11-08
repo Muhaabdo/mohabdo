@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /assets/_brand_extract/
+
+Sitemap: https://mohabdo.com/sitemap.xml

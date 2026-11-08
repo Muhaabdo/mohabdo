@@ -1,0 +1,49 @@
+# mohabdo.com — static site on Hostinger (LiteSpeed / Apache compatible)
+
+Options -Indexes
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Never serve git metadata or internal working files
+  RewriteRule (^|/)\.git(/|$) - [R=404,L]
+  RewriteRule ^assets/_brand_extract/ - [R=404,L]
+  RewriteRule \.(docx|zip|md)$ - [R=404,L,NC]
+  RewriteRule ^assets/ChatGPT - [R=404,L,NC]
+
+  # www -> bare domain (canonical: https://mohabdo.com/).
+  # HTTP -> HTTPS is left to hPanel's "Force HTTPS" so it can't loop behind Hostinger's CDN.
+  RewriteCond %{HTTP_HOST} ^www\. [NC]
+  RewriteRule ^ https://mohabdo.com%{REQUEST_URI} [R=301,L]
+
+  # /index.html -> /  (avoid duplicate homepage URL)
+  RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
+  RewriteRule ^index\.html$ / [R=301,L]
+</IfModule>
+
+# Compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript text/javascript application/json image/svg+xml text/xml application/xml text/plain
+</IfModule>
+
+# Caching: HTML always revalidates so updates show immediately;
+# CSS/JS are versioned (?v=N) in the HTML; images rarely change.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+  <FilesMatch "\.(webp|png|jpe?g|svg|ico|woff2?)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+  <FilesMatch "\.(xml|txt)$">
+    Header set Cache-Control "public, max-age=3600"
+  </FilesMatch>
+
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+</IfModule>
