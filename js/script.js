@@ -322,3 +322,46 @@ if (langToggle) {
     applyLang(currentLang === "ar" ? "en" : "ar");
   });
 }
+
+// ---------------------------------------------------------------------
+// Analytics: dataLayer events picked up by GTM (GTM-PZN8QJ2T) and sent to
+// GA4 (G-90LSNG1SQE). One delegated listener covers every WhatsApp, call
+// and email link on the page, including ones added later.
+// ---------------------------------------------------------------------
+window.dataLayer = window.dataLayer || [];
+
+document.addEventListener("click", (event) => {
+  const link = event.target.closest("a[href]");
+  if (!link) return;
+  const href = link.getAttribute("href") || "";
+  let eventName = null;
+  if (href.indexOf("wa.me") !== -1 || href.indexOf("api.whatsapp.com") !== -1) eventName = "whatsapp_click";
+  else if (href.indexOf("tel:") === 0) eventName = "phone_click";
+  else if (href.indexOf("mailto:") === 0) eventName = "email_click";
+  if (!eventName) return;
+
+  const placement = link.closest(".mobile-sticky-bar")
+    ? "mobile_sticky"
+    : link.closest(".floating-contact")
+    ? "floating"
+    : link.closest(".contact-channels")
+    ? "contact_section"
+    : link.closest(".thanks-wrap")
+    ? "thank_you"
+    : "other";
+
+  window.dataLayer.push({ event: eventName, link_placement: placement, page_language: currentLang });
+});
+
+// Lead: FormSubmit redirects to thank-you.html after a successful submission.
+// Fire generate_lead once per session so reloads don't double-count.
+if (/thank-you/.test(window.location.pathname)) {
+  try {
+    if (!sessionStorage.getItem("mohabdo_lead_sent")) {
+      window.dataLayer.push({ event: "generate_lead", form_name: "contact_brief", page_language: currentLang });
+      sessionStorage.setItem("mohabdo_lead_sent", "1");
+    }
+  } catch (e) {
+    window.dataLayer.push({ event: "generate_lead", form_name: "contact_brief", page_language: currentLang });
+  }
+}
