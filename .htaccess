@@ -17,9 +17,9 @@ DirectoryIndex index.html
   RewriteCond %{HTTP_HOST} ^www\. [NC]
   RewriteRule ^ https://mohabdo.com%{REQUEST_URI} [R=301,L]
 
-  # /index.html -> /  (avoid duplicate homepage URL)
-  RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
-  RewriteRule ^index\.html$ / [R=301,L]
+  # /index.html -> /  and  /ar/index.html -> /ar/  (avoid duplicate URLs)
+  RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?] [NC]
+  RewriteRule ^(.*/)?index\.html$ /$1 [R=301,L]
 </IfModule>
 
 # Compression

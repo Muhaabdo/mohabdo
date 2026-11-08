@@ -1010,3 +1010,10 @@ html[dir="rtl"] .skip-link:focus {
     mask-image: linear-gradient(180deg, black 0%, black 88%, transparent 100%);
   }
 }
+
+/* Language switch is a real link to /ar/ or / (was a button) */
+a.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
